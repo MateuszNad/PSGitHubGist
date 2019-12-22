@@ -45,8 +45,8 @@ Whenever there's new version you simply run the command and you can enjoy it. Re
 Add to your profile a default value for parameter UserName and Token. It will help you on easier use the functions of PSGitHubGist.
 
 ```powershell
-$PSDefaultParameterValues.Add("*-GitHubGist:UserName", "10.10.0.30")
-$PSDefaultParameterValues.Add("*-GitHubGist:Token", "10.10.0.30")
+$PSDefaultParameterValues.Add("*-GitHubGist:UserName", "your-username")
+$PSDefaultParameterValues.Add("*-GitHubGist:Token", "your-token")
 ```
 
 ## Examples
