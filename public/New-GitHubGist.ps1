@@ -56,19 +56,18 @@ function New-GithubGist
         {
             $Public = 'true'
         }
-
-        if ($null -eq $Name)
-        {
-            # set name if parameter -Name is empty
-            $Name = Split-Path -Path $Path -Leaf
-        }
     }
     process
     {
         if ($PSCmdlet.ShouldProcess($Path))
         {
-            [string]$Content = Get-Content $Path -Raw -Encoding Ascii
+            if ($null -eq $Name)
+            {
+                # set name if parameter -Name is empty
+                $Name = Split-Path -Path $Path -Leaf
+            }
 
+            [string]$Content = Get-Content $Path -Raw -Encoding Ascii
 
             $Obj = [PSCustomObject]@{
                 description = "$Description"
