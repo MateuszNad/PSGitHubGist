@@ -1,0 +1,34 @@
+# Docs: https://aka.ms/yaml
+name: $(Build.DefinitionName)_$(Date:yyyyMMdd))
+pr:
+- master
+
+queue:
+  name: Hosted VS2017
+
+steps:
+- powershell: .\bootstrap.ps1
+  displayName: 'Install pre-requisites'
+
+- powershell: Invoke-Build -Task InstallDependencies
+  displayName: 'Install Dependencies'
+
+- powershell: Invoke-Build -Task UpdateHelp -ModuleName PSGitHubGist
+  displayName: 'Update Help'
+
+- powershell: Invoke-Build -Task Analyze -ModuleName PSGitHubGist
+  displayName: 'Analyze'
+
+- powershell: Invoke-Build -Task Test -ModuleName PSGitHubGist
+  displayName: 'Test'
+
+- powershell: Invoke-Build -Task CopyFiles -ModuleName PSGitHubGist
+  displayName: 'Copy Files'
+
+- powershell: Invoke-Build -Task Publish -ModuleName PSGitHubGist -Configuration 'Production'
+  displayName: 'Publish PowerShell Module'
+  env:
+    NuGetApiKey: $(NugetAPIKey)
+
+- powershell: Invoke-Build -Task Clean -ModuleName PSGitHubGist
+  displayName: 'Clean Files'

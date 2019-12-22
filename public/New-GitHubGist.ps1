@@ -24,7 +24,7 @@
 function New-GithubGist
 {
     [Alias('New-Gists')]
-    [cmdletbinding()]
+    [cmdletbinding(SupportsShouldProcess)]
     param(
         [Parameter(Mandatory)]
         [string]$UserName,
@@ -57,6 +57,7 @@ function New-GithubGist
             $Public = 'true'
         }
 
+        # check parameter -Name
         if ($null -eq $Name)
         {
             $Name = Split-Path -Path $Path -Leaf
@@ -79,7 +80,7 @@ function New-GithubGist
         try
         {
             $Body = $Obj | ConvertTo-Json
-                        Write-Verbose ($Header.Authorization)
+            Write-Verbose ($Header.Authorization)
 
             $Result = Invoke-RestMethod -Uri "https://api.github.com/gists" -Method Post -Headers $Header -Body $Body
             $Result | Add-Member -Name embed -MemberType NoteProperty -Value ('<script src="{0}.js"></script>' -f $Result.html_url)
