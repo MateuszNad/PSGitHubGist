@@ -1,6 +1,6 @@
 
 <p align="left">
-  <a href="https://www.powershellgallery.com/packages/PSYamahaMusicCast"><img src="https://img.shields.io/azure-devops/build/mnadobnik/e0b7e400-0d25-496b-90c1-d3d3224f163c/4"></a>
+  <a href="https://www.powershellgallery.com/packages/PSYamahaMusicCast"><img src="https://img.shields.io/azure-devops/build/mnadobnik/e0b7e400-0d25-496b-90c1-d3d3224f163c/6"></a>
   <a href="https://www.powershellgallery.com/packages/PSGitHubGist"><img src="https://img.shields.io/powershellgallery/v/PSGitHubGist.svg"></a>
   <a href="https://www.powershellgallery.com/packages/PSGitHubGist"><img src="https://img.shields.io/powershellgallery/p/PSGitHubGist.svg"></a>
   <a href="https://twitter.com/MateuszNadobnik"><img src="https://img.shields.io/twitter/follow/MateuszNadobnik.svg?label=Twitter%20%40MateuszNadobnik&style=social"></a>
