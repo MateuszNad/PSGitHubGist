@@ -58,7 +58,7 @@ List the authenticated user's starred gists
 
 ### EXAMPLE 4
 ```
-Get-GithubGist  -UserName 'mnadobnik' -Token '4725a2b2c59ed7296699db3d6736f84802b4ea55' -Public
+Get-GithubGist  -UserName 'mnadobnik' -Token 'bc972823d9c79084ebfaefdc7ee98cbc1d259d1c' -Public
 ```
 
 List all public gists sorted by most recently updated to least recently updated.
