@@ -24,7 +24,7 @@
 function Remove-GithubGist
 {
     [Alias('Remove-Gist')]
-    [cmdletbinding()]
+    [cmdletbinding(SupportsShouldProcess)]
     param(
         [Parameter(Mandatory)]
         [string]$UserName,
@@ -46,17 +46,20 @@ function Remove-GithubGist
     }
     process
     {
-        try
+        if ($PSCmdlet.ShouldProcess($Id))
         {
-            $Uri = "https://api.github.com/gists/$Id"
+            try
+            {
+                $Uri = "https://api.github.com/gists/$Id"
 
-            Write-Verbose ($Header.Authorization)
-            $Result = Invoke-RestMethod -Uri $Uri -Method Delete -Headers $Header
-            Write-Output $Result
-        }
-        catch
-        {
-            Write-Warning $_.Error
+                Write-Verbose ($Header.Authorization)
+                $Result = Invoke-RestMethod -Uri $Uri -Method Delete -Headers $Header
+                Write-Output $Result
+            }
+            catch
+            {
+                Write-Warning $_.Error
+            }
         }
     }
 }

@@ -18,6 +18,8 @@
 - New-GitHubGist
 - Remove-GitHubGist
 
+The module works correct to PowerShell 7.
+
 ## ChangeLog
 
 - 0.1.0 - 20.12.2019

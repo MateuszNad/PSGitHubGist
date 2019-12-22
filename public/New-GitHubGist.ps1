@@ -57,38 +57,41 @@ function New-GithubGist
             $Public = 'true'
         }
 
-        # check parameter -Name
         if ($null -eq $Name)
         {
+            # set name if parameter -Name is empty
             $Name = Split-Path -Path $Path -Leaf
         }
     }
     process
     {
-        [string]$Content = Get-Content $Path -Raw -Encoding Ascii
+        if ($PSCmdlet.ShouldProcess($Path))
+        {
+            [string]$Content = Get-Content $Path -Raw -Encoding Ascii
 
 
-        $Obj = [PSCustomObject]@{
-            description = "$Description"
-            public      = "$Public"
-            files       = @{
-                $Name = @{
-                    "content" = $Content
+            $Obj = [PSCustomObject]@{
+                description = "$Description"
+                public      = "$Public"
+                files       = @{
+                    $Name = @{
+                        "content" = $Content
+                    }
                 }
             }
-        }
-        try
-        {
-            $Body = $Obj | ConvertTo-Json
-            Write-Verbose ($Header.Authorization)
+            try
+            {
+                $Body = $Obj | ConvertTo-Json
+                Write-Verbose ($Header.Authorization)
 
-            $Result = Invoke-RestMethod -Uri "https://api.github.com/gists" -Method Post -Headers $Header -Body $Body
-            $Result | Add-Member -Name embed -MemberType NoteProperty -Value ('<script src="{0}.js"></script>' -f $Result.html_url)
-            Write-Output $Result
-        }
-        catch
-        {
-            Write-Warning $_
+                $Result = Invoke-RestMethod -Uri "https://api.github.com/gists" -Method Post -Headers $Header -Body $Body
+                $Result | Add-Member -Name embed -MemberType NoteProperty -Value ('<script src="{0}.js"></script>' -f $Result.html_url)
+                Write-Output $Result
+            }
+            catch
+            {
+                Write-Warning $_
+            }
         }
     }
 }
